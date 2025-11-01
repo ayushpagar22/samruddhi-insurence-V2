@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<!-- 
+  This is a complete, single-file version of the Samruddhi Insurance website.
+  It includes all HTML, CSS, and JavaScript.
+  
+  Key changes:
+  1.  All text is now translatable with 'data-en' and 'data-mr' attributes.
+  2.  English is set as the default language.
+  3.  CSS and JavaScript are embedded directly in this file.
+  4.  Mobile responsiveness has been significantly improved.
+  5.  Partner logo paths and styles have been fixed.
+  6.  JavaScript has been cleaned up and de-duplicated.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samruddhi Insurance - Vehicle Insurance, Loan & RTO Services</title>
+      <link rel="icon" href="logo.png" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Embedded CSS from style.css -->
+  <style>
+    /* --- Root Variables --- */
+    :root {
+      --primary-blue: #003B73;
+      --light-blue: #007BFF;
+      --yellow-accent: #FFC107;
+      --white: #ffffff;
+      --light-grey: #f8f9fa;
+      --text-color: #343a40;
+      --font-family: 'Poppins', sans-serif;
+      --border-radius: 12px;
+    }
+
+    /* --- Reset & Base --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--white);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--primary-blue);
+      margin-bottom: 15px;
+    }
+
+    h2.section-heading {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+    }
+    
+    h2.small-margin {
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--light-blue);
+      transition: 0.3s;
+    }
+
+    a:hover { color: var(--primary-blue); }
+
+    .section-padding {
+      padding: 60px 0;
+      background:radial-gradient(circle at 30% 70%, rgba(173, 216, 230, 0.35), transparent 60%);
+        }
+ 
+    .section-light-bg {
+      backgroundImage: repeating-linear-gradient(45deg, transparent, transparent 0px, rgb(243, 244, 246) 1px, rgb(243, 244, 246) 13px),;
+    
+    }
+
+    /* --- Header --- */
+    header {
+      background: ghostwhite;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: top 0.3s;
+    }
+
+    header.hide {
+      top: -100px; /* Hide header completely */
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      height: 80px;
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary-blue);
+    }
+
+    .logo-img {
+      height: 55px;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .header-toggles {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav a {
+      margin-left: 30px;
+      font-weight: 500;
+      color: var(--primary-blue);
+      position: relative;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--yellow-accent);
+      transition: width 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      color: var(--primary-blue);
+      cursor: pointer;
+    }
+
+    /* --- Language Buttons --- */
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      border: 2px solid var(--primary-blue);
+      color: var(--primary-blue);
+      background: var(--white);
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .lang-btn.active,
+    .lang-btn:hover {
+      background: var(--primary-blue);
+      color: var(--white);
+    }
+
+    /* --- Hero Section --- */
+   .hero-section {
+    background: radial-gradient(125% 125% at 50% 90%, #fff 40%, #6366f1 100%);
+    padding-top: 150px;
+    padding-left: 50px;
+    padding-bottom: 100px;
+    color: var(--primary-blue);
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+    .hero-content h1 {
+
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: -20px;
+
+      animation-name: text-focus-in;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+      
+    /* shorthand
+    animation: text-focus-in 1.2s linear 0s 1 normal none;*/
+    }
+
+@keyframes text-focus-in {
+      
+    0% {
+      filter:blur(12px);
+      opacity:0;
+    }
+    100% {
+      filter:blur(0);
+      opacity:1;
+    }
+  }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+
+      animation-name: text-focus-in;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+      
+    /* shorthand
+    animation: text-focus-in 1.2s linear 0s 1 normal none;*/
+    }
+
+
+@keyframes text-focus-in {
+      
+    0% {
+      filter:blur(12px);
+      opacity:0;
+    }
+    100% {
+      filter:blur(0);
+      opacity:1;
+    }
+  }
+
+    .hero-buttons .btn {
+      margin: 10px;
+    }
+
+    .hero-graphic {
+      margin-top: 40px;
+    }
+
+    .hero-img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      transition: 0.3s;
+      cursor: pointer;
+      border: 2px solid transparent;
+      font-size: 1rem;
+      text-align: center;
+    }
+    
+    .btn i {
+      margin-right: 8px;
+    }
+
+    .btn-primary.yellow-btn {
+      background: var(--yellow-accent);
+      color: var(--primary-blue);
+      border-color: var(--yellow-accent);
+    }
+
+    .btn-primary.yellow-btn:hover {
+      background: #e0ac00;
+      border-color: #e0ac00;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary.blue-btn {
+      background: var(--light-blue);
+      color: var(--white);
+      border-color: var(--light-blue);
+    }
+
+    .btn-primary.blue-btn:hover {
+      background: var(--primary-blue);
+      border-color: var(--primary-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-primary.blue-outline-btn {
+      border: 2px solid var(--light-blue);
+      color: var(--light-blue);
+      background: transparent;
+    }
+
+    .btn-outline-primary.blue-outline-btn:hover {
+      background: var(--light-blue);
+      color: var(--white);
+    }
+    
+    .btn-link {
+      color: var(--light-blue);
+      font-weight: 600;
+      padding: 0;
+    }
+    .btn-link i {
+      transition: transform 0.3s;
+    }
+    .btn-link:hover {
+      color: var(--primary-blue);
+    }
+    .btn-link:hover i {
+      transform: translateX(4px);
+    }
+    
+    .btn.small-btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+    
+    .btn.full-width-btn {
+      width: 100%;
+    }
+
+    /* --- Services Preview & Feature Grids --- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+
+    .four-col-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .three-col-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card, .feature-box, .detailed-card {
+      background-color: var(--white);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 20px rgba(0, 59, 115, 0.05);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #eee;
+    }
+
+    .service-card:hover, .feature-box:hover, .detailed-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 59, 115, 0.1);
+    }
+
+    .icon-large {
+      font-size: 3rem;
+      color: var(--light-blue);
+      margin-bottom: 15px;
+    }
+
+    .icon-medium {
+      font-size: 2.2rem;
+      color: var(--light-blue);
+      margin-bottom: 15px;
+    }
+
+    .service-card h3, .detailed-card h4, .feature-box h4 {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .detailed-card {
+      text-align: left;
+      padding: 25px;
+    }
+
+    .detailed-card h4 {
+      font-size: 1.2rem;
+      color: var(--primary-blue);
+    }
+
+    .detailed-card i {
+      float: left;
+      margin-right: 15px;
+      font-size: 2rem;
+      color: var(--light-blue);
+      width: 35px;
+      text-align: center;
+    }
+
+    .detailed-card p {
+      margin-left: 50px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    
+    .detailed-card .btn {
+      margin-left: 50px;
+    }
+
+    /* --- Why Choose Us --- */
+    .feature-box {
+      padding: 25px;
+    }
+
+    /* --- Partner Logos --- */
+    .partner-logos-strip {
+      display: flex;
+      justify-content: center; /* Center the logos */
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px; /* Add gap for spacing */
+      padding: 20px 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #777;
+    }
+
+    .logo-item img {
+      max-height: 50px; /* Make logos a bit larger */
+      width: auto;
+      max-width: 150px;
+      /* Removed filter and opacity to make logos visible */
+    }
+
+    /* --- Services Tabs --- */
+    .tabs-nav {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .tab-btn {
+      padding: 12px 25px;
+      margin: 0 5px;
+      border: none;
+      background-color: transparent;
+      color: var(--primary-blue);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .tab-btn i {
+      margin-right: 8px;
+    }
+
+    .tab-btn:hover {
+      color: var(--light-blue);
+    }
+
+    .tab-btn.active {
+      border-bottom-color: var(--yellow-accent);
+      color: var(--light-blue);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* --- About Section (Replaces .parent grid) --- */
+    .about-flex-container {
+      background: transparent;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .about-image-side {
+      flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
+      text-align: center;
+    }
+    .about-text-side {
+      flex: 1 1 400px;
+    }
+    .about-img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+    }
+    .about-text-side h3 {
+      color: var(--light-blue);
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+    .mission-text {
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin: 20px 0;
+      padding-left: 15px;
+      border-left: 4px solid var(--yellow-accent);
+    }
+    
+    /* Remove old, non-responsive styles */
+    .parent, .div11, .div13, article {
+      all: unset;
+    }
+    section::after {
+      all: unset;
+    }
+
+
+    /* --- Testimonials --- */
+    .testimonial-carousel {
+      display: flex;
+      overflow-x: auto; /* Enable scrolling */
+      scroll-snap-type: x mandatory;
+      padding-bottom: 20px;
+      justify-content: flex-start; /* Start from left */
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      flex: 0 0 350px; /* Fixed width for cards */
+      scroll-snap-align: start;
+      padding: 30px;
+      background: #bcf7df;
+background: radial-gradient(circle, rgba(188, 247, 223, 1) 0%, rgba(125, 151, 255, 1) 100%);
+      border: 1px solid #eee;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .quote-icon {
+      font-size: 1.5rem;
+      color: darkblue;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-card p {
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 15px;
+
+      color: black;
+    }
+
+    .client-info {
+      font-weight: 600;
+      color: var(--primary-blue);
+       text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+    }
+
+    /* --- Contact CTA Banner --- */
+    .cta-banner {
+      background: var(--primary-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cta-heading {
+      color: var(--white);
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .cta-buttons > * {
+      margin: 10px;
+    }
+
+    /* --- Contact Modal (Hidden by default) --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+      padding-top: 50px;
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 900px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: slideIn 0.4s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close-btn {
+      color: #aaa;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: var(--primary-blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 30px;
+    }
+
+    .contact-form-side h3, .contact-info-side h3 {
+      margin-bottom: 20px;
+      color: var(--light-blue);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--primary-blue);
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: var(--font-family);
+      font-size: 1rem;
+    }
+    
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+    .contact-info-side p {
+      margin-bottom: 12px;
+      font-size: 1rem;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .contact-info-side i {
+      color: var(--yellow-accent);
+      margin-right: 12px;
+      width: 20px;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .map-text {
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    .google-map-embed {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 10px;
+      border: 1px solid #eee;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: var(--primary-blue);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 50px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 2fr;
+      gap: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-col h4 {
+      color: var(--yellow-accent);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-col p, .footer-col li {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: var(--yellow-accent);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col i {
+      margin-right: 10px;
+      width: 15px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      gap: 40px;
+      padding-top: 20px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* --- Floating Buttons --- */
+    .floating-buttons {
+      position: fixed;
+      right: 20px;
+      bottom: 80px; /* Moved up to make space for scroll-to-top */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .floating-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--white);
+      font-size: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    
+    .floating-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-btn { background: #25D366; }
+    .call-btn { background: var(--light-blue); }
+
+    /* --- Scroll to Top --- */
+    #scroll-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 998;
+      transition: background-color 0.3s;
+    }
+
+    #scroll-to-top:hover {
+      background: var(--light-blue);
+    }
+    
+    /* --- Scroll Reveal Animation --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* --- Responsive --- */
+    
+    @media (max-width: 992px) {
+      .card-grid, .three-col-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .four-col-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-col {
+        margin-bottom: 20px;
+      }
+      .testimonial-card {
+        flex: 0 0 300px;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header .container {
+          display: grid;
+          grid-template-columns: 1fr auto; /* Logo on left, toggles on right */
+          width: 100%;
+          padding: 10px 15px;
+          height: 75px;
+      }
+      .logo {
+         grid-column: 1;
+      }
+      .logo a {
+        font-size: 1.2rem; /* Smaller logo text */
+      }
+      .logo-img {
+        height: 45px; /* Smaller logo */
+      }
+      .header-toggles {
+          grid-column: 2;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--white);
+        position: absolute;
+        top: 75px; /* Adjust based on new header height */
+        left: 0;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        padding-bottom: 15px;
+        animation: slideDown 0.3s ease-out;
+      }
+      
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      nav.active { display: flex; }
+
+      nav a {
+        margin: 15px 0;
+        font-size: 1.2rem;
+      }
+      
+      nav a::after {
+        display: none; /* Disable underline effect on mobile */
+      }
+
+      .menu-toggle { display: block; }
+      
+      .hero-section {
+        padding-top: 120px; /* More space for header */
+      }
+      .hero-content h1 { font-size: 2.2rem; }
+      .hero-content p { font-size: 1.1rem; }
+      .hero-img { width: 80%; }
+      .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+      .hero-buttons .btn {
+        width: 80%;
+        max-width: 300px;
+        margin: 0;
+      }
+
+      .card-grid, .three-col-grid, .four-col-grid { 
+        grid-template-columns: 1fr; 
+      }
+      
+      .testimonial-card {
+        flex-basis: 85%; /* One card at a time, with peeking */
+      }
+      .testimonial-carousel {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      .tabs-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tab-btn {
+        font-size: 1rem;
+        margin: 5px;
+        padding: 10px 15px;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info-side {
+        margin-top: 20px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: left;
+        gap: 20px;
+      }
+      
+      .cta-heading {
+        font-size: 1.5rem;
+      }
+      
+      .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .cta-buttons .btn {
+        width: 80%;
+        max-width: 300px;
+        margin: 0;
+      }
+      
+      .partner-logos-strip {
+        gap: 20px;
+      }
+      .logo-item img {
+        max-height: 40px;
+      }
+      
+      h2.section-heading {
+        font-size: 1.8rem;
+      }
+    }
+    /* ADD THIS NEW RULE */
+.logo-slider-section {
+  display: grid;
+  place-items: center;
+  padding-top: 60px; /* Add padding that was missing */
+  background: var(--light-grey);
+}
+
+h1 {
+    font-size: 3rem;
+    padding: 20px;
+    margin: 20px 0px;
+}
+
+.slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    overflow: hidden;
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.slider-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    animation: scrolling 20s linear infinite;
+
+}
+
+@keyframes scrolling {
+
+    0% {
+        transform: translateX(80%);
+    }
+
+    100% {
+        transform: translateX(-20%);
+    }
+}
+
+.slider-items img {
+    width: 12%;
+    margin: 20px;
+
+}
+
+    @media (max-width: 480px) {
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 1rem; }
+    }
+
+@media (max-width: 768px) {
+  nav {
+    display: none; /* Hidden by default on mobile */
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    /* ... other styles */
+  }
+
+  nav.active { 
+    display: flex; /* Shown when hamburger is clicked */
+  }
+
+  .menu-toggle { 
+    display: block; /* Hamburger icon is made visible */
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/9604554336" class="floating-btn whatsapp-btn" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:9604554336" class="floating-btn call-btn" title="Call"><i class="fas fa-phone-alt"></i></a>
+  </div>
+
+  <!-- Header -->
+
+  <header id="header">
+    <div class="container">
+      <div class="logo">
+        <a href="#home">
+          <!-- Using the uploaded logo.png -->
+          <img src="logo.png" alt="Samruddhi Insurance Logo" class="logo-img" />
+          <span data-en="Samruddhi Insurance" data-mr="समृद्धी इन्शुरन्स">Samruddhi Insurance</span>
+        </a>
+      </div>
+
+      <div class="header-toggles">
+        <div class="lang-toggle">
+          <button id="lang-en" class="lang-btn active">EN</button>
+          <button id="lang-mr" class="lang-btn">MR</button>
+        </div>
+
+        <nav id="navbar">
+          <a href="#home" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a>
+          <a href="#services" data-en="Services" data-mr="सेवा">Services</a>
+          <a href="#about" data-en="About" data-mr="आमच्याबद्दल">About</a>
+          <a href="#contact-cta" data-en="Contact" data-mr="संपर्क">Contact</a>
+        </nav>
+
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container hero-content">
+        <h1 data-en="Samruddhi Insurance" data-mr="समृद्धी इन्शुरन्स">Samruddhi Insurance</h1>
+
+        <p data-en="All types of vehicle insurance, loan, and RTO services under one roof."
+           data-mr="सर्व प्रकारच्या वाहनांचे इन्शुरन्स, लोन आणि RTO सेवा एकाच ठिकाणी.">
+           All types of vehicle insurance, loan, and RTO services under one roof.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#contact-cta" class="btn btn-primary yellow-btn" data-en="Get Quote" data-mr="कोट मिळवा">Get Quote</a>
+          <a href="tel:9604554336" class="btn btn-outline-primary blue-outline-btn" data-en="Call Now" data-mr="कॉल करा">Call Now</a>
+        </div>
+        <div class="hero-graphic">
+          <!-- Using the uploaded hero-banner.jpg -->
+          <img src="hero-banner.png" alt="Samruddhi Insurance Services Banner" class="hero-img" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Preview Section -->
+    <section id="services-preview" class="section-padding">
+      <div class="container">
+          <h2 class="section-heading" data-en="Our Services" data-mr="आमच्या सेवा">Our Services</h2>
+          <div class="card-grid">
+              <div class="service-card reveal">
+                  <i class="fas fa-car-side icon-large"></i>
+                  <h3 data-en="Vehicle Loans" data-mr="वाहनांचे कर्ज">Vehicle Loans</h3>
+                  <p data-en="Quick loan facility available for new and old vehicles." 
+                     data-mr="नवीन व जुन्या वाहनांसाठी त्वरित कर्ज सुविधा उपलब्ध.">Quick loan facility available for new and old vehicles.</p>
+                  <a href="#services" class="btn btn-link" data-en="Learn More" data-mr="अधिक जाणून घ्या">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+              <div class="service-card reveal">
+                  <i class="fas fa-shield-alt icon-large"></i>
+                  <h3 data-en="All Types of Insurance" data-mr="सर्व प्रकारचे इन्शुरन्स">All Types of Insurance</h3>
+                  <p data-en="Insurance for two-wheelers, cars, health, and commercial vehicles." 
+                     data-mr="टू-व्हीलर, कार, आरोग्य आणि व्यावसायिक वाहनांचा इन्शुरन्स.">Insurance for two-wheelers, cars, health, and commercial vehicles.</p>
+                  <a href="#services" class="btn btn-link" data-en="Learn More" data-mr="अधिक जाणून घ्या">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+              <div class="service-card reveal">
+                  <i class="fas fa-id-card icon-large"></i>
+                  <h3 data-en="RTO Services" data-mr="RTO सेवा">RTO Services</h3>
+                  <p data-en="RC transfer, passing, and other online RTO work." 
+                     data-mr="आरसी ट्रान्सफर, पासिंग आणि इतर ऑनलाईन RTO कामे.">RC transfer, passing, and other online RTO work.</p>
+                  <a href="#services" class="btn btn-link" data-en="Learn More" data-mr="अधिक जाणून घ्या">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="section-padding section-light-bg">
+        <div class="container">
+            <h2 class="section-heading" data-en="Why Choose Us?" data-mr="आम्हाला का निवडावे?">Why Choose Us?</h2>
+            <div class="card-grid four-col-grid">
+                <div class="feature-box reveal">
+                    <i class="fas fa-handshake icon-medium"></i>
+                    <h4 data-en="Trusted Partners" data-mr="विश्वसनीय भागीदार">Trusted Partners</h4>
+                    <p data-en="Partnership with all major insurance companies." 
+                       data-mr="सर्व प्रमुख इन्शुरन्स कंपन्यांसोबत भागीदारी.">Partnership with all major insurance companies.</p>
+                </div>
+                <div class="feature-box reveal">
+                    <i class="fas fa-tachometer-alt icon-medium"></i>
+                    <h4 data-en="Quick Process" data-mr="जलद प्रक्रिया">Quick Process</h4>
+                    <p data-en="Fast and hassle-free documentation process." 
+                       data-mr="जलद आणि कागदपत्रांच्या कमी त्रासाची प्रक्रिया.">Fast and hassle-free documentation process.</p>
+                </div>
+                <div class="feature-box reveal">
+                    <i class="fas fa-globe icon-medium"></i>
+                    <h4 data-en="Online RTO Help" data-mr="ऑनलाईन RTO मदत">Online RTO Help</h4>
+                    <p data-en="Expert guidance for online RTO related tasks." 
+                       data-mr="ऑनलाईन RTO कामांसाठी तज्ञांचे मार्गदर्शन.">Expert guidance for online RTO related tasks.</p>
+                </div>
+                <div class="feature-box reveal">
+                    <i class="fas fa-headset icon-medium"></i>
+                    <h4 data-en="Customer Support" data-mr="ग्राहक समर्थन">Customer Support</h4>
+                    <p data-en="Excellent and prompt customer service." 
+                       data-mr="उत्तम आणि तत्पर ग्राहक सेवा.">Excellent and prompt customer service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+      <section class="logo-slider-section section-light-bg">
+        <h2 class="section-heading" data-en="Our Trusted Partners" data-mr="आमचे विश्वसनीय भागीदार">Our Trusted Partners</h2>
+        <div class="slider">
+            <div class="slider-items">
+                <img src="placeholder_logo1.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo2.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo3.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo4.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo5.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo1.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo2.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo3.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo4.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo5.png ?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo1.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="placeholder_logo2.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+                <img src="" alt="">
+                <img src="placeholder_logo3.png?crop=1:1,smart&width=150&dpr=2"
+                    alt="">
+
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Detailed Services Section with Tabs -->
+    <section id="services" class="section-padding section-light-bg">
+        <div class="container">
+            <h2 class="section-heading" data-en="All Our Services" data-mr="आमच्या सर्व सेवा">All Our Services</h2>
+            
+            <div class="tabs-nav reveal">
+                <button class="tab-btn active" data-tab="loans" data-en="Loan Services" data-mr="कर्ज सेवा"><i class="fas fa-hand-holding-usd"></i> Loan Services</button>
+                <button class="tab-btn" data-tab="insurance" data-en="Insurance Services" data-mr="विमा सेवा"><i class="fas fa-shield-alt"></i> Insurance Services</button>
+                <button class="tab-btn" data-tab="rto" data-en="RTO Services" data-mr="RTO सेवा"><i class="fas fa-id-badge"></i> RTO Services</button>
+            </div>
+
+            <!-- Loan Tab -->
+            <div id="loans" class="tab-content active reveal">
+                <div class="card-grid three-col-grid">
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-car"></i>
+                        <h4 data-en="Car Loan" data-mr="कार कर्ज">Car Loan</h4>
+                        <p data-en="Attractive loan rates for new and used cars." data-mr="नवीन आणि जुन्या कारसाठी आकर्षक दरात कर्ज सुविधा.">Attractive loan rates for new and used cars.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-tractor"></i>
+                        <h4 data-en="Tractor Loan" data-mr="ट्रॅक्टर कर्ज">Tractor Loan</h4>
+                        <p data-en="Simple loan process for farmers to buy tractors." data-mr="शेतकऱ्यांसाठी ट्रॅक्टर खरेदीसाठी सोपी कर्ज प्रक्रिया.">Simple loan process for farmers to buy tractors.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-truck"></i>
+                        <h4 data-en="Commercial Vehicle Loan" data-mr="व्यावसायिक वाहन कर्ज">Commercial Vehicle Loan</h4>
+                        <p data-en="Loans for commercial vehicles (Truck, Bus, etc.)." data-mr="व्यावसायिक वाहनांसाठी (Truck, Bus, etc.) कर्ज.">Loans for commercial vehicles (Truck, Bus, etc.).</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-user"></i>
+                        <h4 data-en="Personal Loan" data-mr="वैयक्तिक कर्ज">Personal Loan</h4>
+                        <p data-en="Quick personal loans for your personal needs." data-mr="तुमच्या वैयक्तिक गरजांसाठी त्वरित वैयक्तिक कर्ज.">Quick personal loans for your personal needs.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-home"></i>
+                        <h4 data-en="Housing Loan" data-mr="गृह कर्ज">Housing Loan</h4>
+                        <p data-en="Home loans to make your dream home a reality." data-mr="तुमचे घराचे स्वप्न पूर्ण करण्यासाठी गृह कर्ज.">Home loans to make your dream home a reality.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insurance Tab -->
+            <div id="insurance" class="tab-content reveal">
+                <div class="card-grid three-col-grid">
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-motorcycle"></i>
+                        <h4 data-en="Two-wheeler Insurance" data-mr="दुचाकी विमा">Two-wheeler Insurance</h4>
+                        <p data-en="Affordable and best insurance for your bike." data-mr="तुमच्या दुचाकीसाठी स्वस्त आणि सर्वोत्तम इन्शुरन्स.">Affordable and best insurance for your bike.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-car"></i>
+                        <h4 data-en="Four-wheeler Insurance" data-mr="चारचाकी विमा">Four-wheeler Insurance</h4>
+                        <p data-en="Choose from various car insurance options." data-mr="कार इन्शुरन्सच्या विविध पर्यायांमधून निवडा.">Choose from various car insurance options.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4 data-en="Health Insurance" data-mr="आरोग्य विमा">Health Insurance</h4>
+                        <p data-en="The right health insurance plan for health security." data-mr="आरोग्य सुरक्षेसाठी योग्य आरोग्य विमा योजना.">The right health insurance plan for health security.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-house-damage"></i>
+                        <h4 data-en="Home Insurance" data-mr="गृह विमा">Home Insurance</h4>
+                        <p data-en="Protection for your home against damages." data-mr="तुमच्या घराचे नुकसानीपासून संरक्षण.">Protection for your home against damages.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-store-alt"></i>
+                        <h4 data-en="Shop Insurance" data-mr="दुकान विमा">Shop Insurance</h4>
+                        <p data-en="Insurance for your shop and business." data-mr="तुमच्या दुकानासाठी आणि व्यवसायासाठी विमा.">Insurance for your shop and business.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RTO Tab -->
+            <div id="rto" class="tab-content reveal">
+                <div class="card-grid three-col-grid">
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4 data-en="RC Transfer" data-mr="आरसी ट्रान्सफर">RC Transfer</h4>
+                        <p data-en="Simple process for vehicle ownership transfer." data-mr="वाहन मालकी हस्तांतरणाची सोपी प्रक्रिया.">Simple process for vehicle ownership transfer.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-file-signature"></i>
+                        <h4 data-en="Passing (Commercial)" data-mr="पासिंग (व्यावसायिक)">Passing (Commercial)</h4>
+                        <p data-en="Passing and permit work for commercial vehicles." data-mr="व्यावसायिक वाहनांसाठी पासिंग आणि परमिट कामे.">Passing and permit work for commercial vehicles.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-ban"></i>
+                        <h4 data-en="HP Cancellation" data-mr="HP रद्दीकरण">HP Cancellation</h4>
+                        <p data-en="Hypothecation cancellation after loan repayment." data-mr="कर्ज फेड झाल्यावर हायपोथिकेशन रद्द करणे.">Hypothecation cancellation after loan repayment.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4 data-en="NOC (No Objection Certificate)" data-mr="NOC (ना हरकत प्रमाणपत्र)">NOC</h4>
+                        <p data-en="Get a No Objection Certificate for other states." data-mr="इतर राज्यांसाठी ना हरकत प्रमाणपत्र मिळवा.">Get a No Objection Certificate for other states.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                    <div class="service-card detailed-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h4 data-en="Online RTO Work" data-mr="ऑनलाइन RTO कामे">Online RTO Work</h4>
+                        <p data-en="All other online work of the Transport Department." data-mr="परिवहन विभागाचे इतर सर्व ऑनलाईन कामे.">All other online work of the Transport Department.</p>
+                        <a href="#contact-cta" class="btn btn-primary yellow-btn small-btn" data-en="Enquire Now" data-mr="चौकशी करा">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Replaced old grid) -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="section-heading" data-en="About Samruddhi Insurance" data-mr="समृद्धी इन्शुरन्स बद्दल">About Samruddhi Insurance</h2>
+            <div class="about-flex-container">
+                <div class="about-image-side reveal">
+                    <!-- Using hero-banner.jpg again as a placeholder, you can change this src -->
+                    <img src="hero-banner.png" alt="Samruddhi Insurance Office" class="about-img">
+                </div>
+                <div class="about-text-side reveal">
+                    <h3 data-en="Krushna Pagar, Founder" data-mr="कृष्णा पगार, संस्थापक">Krushna Pagar, Founder</h3>
+                    <p data-en="Samruddhi Insurance was founded by 'Krushna Pagar' with a vision to simplify the complex world of vehicle insurance, loans, and RTO services for the people of Nashik and surrounding areas."
+                       data-mr="नाशिक आणि आजूबाजूच्या परिसरातील लोकांसाठी वाहन विमा, कर्ज आणि आरटीओ सेवांचे जटिल जग सोपे करण्याच्या उद्देशाने 'कृष्णा पगार' यांनी समृद्धी इन्शुरन्सची स्थापना केली.">
+                       Samruddhi Insurance was founded by 'Krushna Pagar' with a vision to simplify the complex world of vehicle insurance, loans, and RTO services for the people of Nashik and surrounding areas.
+                    </p>
+                    <p class="mission-text" 
+                       data-en="Our mission is clear: We help people get fast and reliable vehicle insurance and loans. We believe in transparent, honest service that puts the customer's needs first."
+                       data-mr="आमचे ध्येय स्पष्ट आहे: आम्ही लोकांना जलद आणि विश्वासार्ह वाहन विमा आणि कर्ज मिळविण्यात मदत करतो. आम्ही पारदर्शक, प्रामाणिक सेवेवर विश्वास ठेवतो जी ग्राहकांच्या गरजांना प्रथम स्थान देते.">
+                       Our mission is clear: We help people get fast and reliable vehicle insurance and loans. We believe in transparent, honest service that puts the customer's needs first.
+                    </p>
+                    <a href="#contact-cta" class="btn btn-primary yellow-btn" data-en="Consult With Us" data-mr="आमच्याशी संपर्क साधा">Consult With Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-padding section-light-bg">
+        <div class="container">
+            <h2 class="section-heading" data-en="What Our Customers Say" data-mr="आमच्या ग्राहकांचे अनुभव">What Our Customers Say</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p data-en="I got a loan and insurance for my new tractor in such a short time. Excellent service and the process was very easy."
+                       data-mr="माझ्या नवीन ट्रॅक्टरसाठी कर्ज आणि इन्शुरन्स दोन्ही इतक्या कमी वेळेत मिळाले. उत्कृष्ट सेवा आणि प्रक्रिया खूप सोपी होती.">
+                       I got a loan and insurance for my new tractor in such a short time. Excellent service and the process was very easy.
+                    </p>
+                    <div class="client-info" data-en="- Ganesh Wagh, Sinnar" data-mr="- गणेश वाघ, सिन्नर">- Ganesh Wagh, Sinnar</div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p data-en="Transferring the vehicle RC seemed very complicated, but Samruddhi Insurance got my work done very quickly. Definitely recommend."
+                       data-mr="वाहनाचा आरसी ट्रान्सफर करणे खूप किचकट वाटत होते, पण समृद्धी इन्शुरन्समुळे माझे काम खूप लवकर झाले. नक्कीच शिफारस करेन.">
+                       Transferring the vehicle RC seemed very complicated, but Samruddhi Insurance got my work done very quickly. Definitely recommend.
+                    </p>
+                    <div class="client-info" data-en="- Sunil Jadhav, Nashik" data-mr="- सुनील जाधव, नाशिक">- Sunil Jadhav, Nashik</div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p data-en="My bike insurance was renewed instantly. Great customer service and proper guidance."
+                       data-mr="माझ्या दुचाकीचा इन्शुरन्स त्वरित रिन्यू करून मिळाला. उत्तम ग्राहक सेवा आणि योग्य मार्गदर्शन.">
+                       My bike insurance was renewed instantly. Great customer service and proper guidance.
+                    </p>
+                    <div class="client-info" data-en="- Pooja Patil, Lonarwadi" data-mr="- पूजा पाटील, लोणारवाडी">- Pooja Patil, Lonarwadi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner Section -->
+    <section id="contact-cta" class="cta-banner">
+        <div class="container">
+            <h2 class="cta-heading" data-en="Need the right insurance for your vehicle? Contact us now!" 
+                                    data-mr="तुमच्या वाहनासाठी योग्य इन्शुरन्स हवे आहे का? आत्ताच संपर्क करा!">
+                                    Need the right insurance for your vehicle? Contact us now!
+            </h2>
+            <div class="cta-buttons">
+                <a href="https://wa.me/9604554336" target="_blank" class="btn btn-primary yellow-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="tel:9604554336" class="btn btn-primary blue-btn"><i class="fas fa-phone-alt"></i> Call</a>
+                <button class="btn btn-outline-primary blue-outline-btn" id="open-contact-modal"><i class="fas fa-envelope"></i> <span data-en="Get Quote" data-mr="कोट मिळवा">Get Quote</span></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-grid">
+                <div class="contact-form-side">
+                    <h3 data-en="Get Your Free Quote" data-mr="तुमचा मोफत कोट मिळवा">Get Your Free Quote</h3>
+                    <form action="#" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" data-en="Your Name" data-mr="तुमचे नाव">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile" data-en="Mobile Number" data-mr="मोबाईल नंबर">Mobile Number</label>
+                            <input type="tel" id="mobile" name="mobile" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-type" data-en="Service Type" data-mr="सेवेचा प्रकार">Service Type</label>
+                            <select id="service-type" name="service-type" required>
+                                <option value="" data-en="Select Service..." data-mr="सेवा निवडा...">Select Service...</option>
+                                <option value="Vehicle Insurance" data-en="Vehicle Insurance" data-mr="वाहन विमा">Vehicle Insurance</option>
+                                <option value="Loan" data-en="Loan" data-mr="कर्ज">Loan</option>
+                                <option value="RTO Service" data-en="RTO Service" data-mr="RTO सेवा">RTO Service</option>
+                                <option value="Other" data-en="Other" data-mr="इतर">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-en="Your Message" data-mr="तुमचा संदेश">Your Message</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary blue-btn full-width-btn" data-en="Submit Enquiry" data-mr="चौकशी सबमिट करा">Submit Enquiry</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-side">
+                    <h3 data-en="Our Office" data-mr="आमचे कार्यालय">Our Office</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <span data-en="At Post Lonarwadi, Tal. Sinnar, Dist. Nashik 422103" 
+                                                                  data-mr="मु. पो. लोणारवाडी, ता. सिन्नर, जि. नाशिक 422103">
+                                                                  At Post Lonarwadi, Tal. Sinnar, Dist. Nashik 422103</span></p>
+                    <p><i class="fas fa-phone"></i> <span>Phone 1: 9604554336</span></p>
+                    <p><i class="fas fa-phone"></i> <span>Phone 2: 9730955578</span></p>
+                    <p class="map-text" data-en="Find us on Google Maps:" data-mr="आम्हाला Google Maps वर शोधा:">Find us on Google Maps:</p>
+                    <div class="google-map-embed">
+                        <iframe src="https://www.google.com/maps/place/19%C2%B049'14.0%22N+73%C2%B058'19.6%22E/@19.820549,73.9714583,205m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d19.820549!4d73.972102?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D%3D%3D" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 data-en="Samruddhi Insurance" data-mr="समृद्धी इन्शुरन्स">Samruddhi Insurance</h4>
+                <p data-en="Simplifying Insurance, Loan, and RTO services in Nashik."
+                   data-mr="नाशिकमध्ये विमा, कर्ज आणि आरटीओ सेवा सुलभ करणे.">
+                   Simplifying Insurance, Loan, and RTO services in Nashik.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4 data-en="Quick Links" data-mr="द्रुत दुवे">Quick Links</h4>
+                <ul>
+                    <li><a href="#home" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a></li>
+                    <li><a href="#services" data-en="Services" data-mr="सेवा">Services</a></li>
+                    <li><a href="#about" data-en="About Us" data-mr="आमच्याबद्दल">About Us</a></li>
+                    <li><a href="#contact-cta" data-en="Get a Quote" data-mr="कोट मिळवा">Get a Quote</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-en="Contact Us" data-mr="संपर्क साधा">Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> <span data-en="At Post Lonarwadi, Tal. Sinnar, Dist. Nashik 422103" 
+                                                             data-mr="मु. पो. लोणारवाडी, ता. सिन्नर, जि. नाशिक 422103">
+                                                             At Post Lonarwadi, Tal. Sinnar, Dist. Nashik 422103</span></p>
+                <p><i class="fas fa-phone"></i> <span>9604554336 / 9730955578</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span data-en="&copy; 2025 Samruddhi Insurance. All rights reserved."
+                  data-mr="&copy; २०२५ समृद्धी इन्शुरन्स. सर्व हक्क राखीव.">
+                  &copy; 2025 Samruddhi Insurance. All rights reserved.
+            </span>
+               <span data-en=" Website Developed by Lakshmi Web Agency."
+                  data-mr="लक्ष्मी वेब एजन्सी द्वारे बनवलेले.">
+                   Website Developed by Lakshmi Web Agency 
+            </span>
+        </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scroll-to-top" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+  
+  <!-- Embedded JavaScript from script.js -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.getElementById("header");
+        let lastScrollTop = 0;
+
+        // --- 1. Navbar Hide/Show on Scroll & Scroll-to-Top Button ---
+        const scrollTopBtn = document.getElementById("scroll-to-top");
+
+        window.addEventListener("scroll", () => {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Navbar hide/show
+            if (currentScroll > lastScrollTop && currentScroll > 100) {
+              header.classList.add("hide");
+            } else {
+              header.classList.remove("hide");
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+
+            // Scroll-to-top button
+            if (window.scrollY > 300) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // --- 2. Mobile Navbar Toggle ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        mobileMenu.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            mobileMenu.querySelector('i').classList.toggle('fa-bars');
+            mobileMenu.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close navbar on link click (for mobile)
+        document.querySelectorAll('#navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navbar.classList.contains('active')) {
+                    navbar.classList.remove('active');
+                    mobileMenu.querySelector('i').classList.remove('fa-times');
+                    mobileMenu.querySelector('i').classList.add('fa-bars');
+                }
+            });
+        });
+
+        // --- 3. Services Tabs Functionality ---
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+
+                // Remove active from all buttons and content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // --- 4. Contact Modal Functionality ---
+        const modal = document.getElementById('contact-modal');
+        const openModalBtn = document.getElementById('open-contact-modal');
+        const closeBtn = document.querySelector('.close-btn');
+
+        if (openModalBtn) {
+            openModalBtn.onclick = function() {
+                modal.style.display = "block";
+            }
+        }
+
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // --- 5. Scroll Animation (Reveal) ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Pixels from bottom to trigger
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+                // Optional: remove "active" when scrolling up to see animation again
+                // else {
+                //    reveals[i].classList.remove("active");
+                // }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Initial call to check if any elements are already in view on load
+        reveal();
+
+        // --- 6. Basic Testimonials Carousel (Cycles through cards) ---
+        // This is a simple auto-scroll. The horizontal scrollbar is visible on mobile for manual swiping.
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        if(testimonialCards.length > 0) {
+            let currentTestimonial = 0;
+
+            function showTestimonial(index) {
+                // This simple version doesn't hide/show, it just cycles for the auto-scroll
+                // On desktop, all are visible. On mobile, they are scrollable.
+                // A more advanced carousel would be needed for true 1-by-1 sliding.
+            }
+            
+            // We can keep the auto-interval if desired, but manual scroll is more common.
+            // Let's remove the auto-interval as it conflicts with manual scrolling.
+        }
+
+        // --- 7. Multi-language Toggle (English/Marathi) ---
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const translatableElements = document.querySelectorAll('[data-en]');
+
+        function setLanguage(lang) {
+            translatableElements.forEach(el => {
+                // Get the text from the data attribute
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    // Check if the element is a <select>
+                    if (el.tagName === 'SELECT') {
+                        // Find the option with the matching value and set its text
+                        // This assumes the value attribute is the key
+                        const options = el.querySelectorAll('option');
+                        options.forEach(option => {
+                            const optionText = option.getAttribute(`data-${lang}`);
+                            if(optionText) {
+                                option.textContent = optionText;
+                            }
+                        });
+                    } else {
+                        // For all other elements, just set the textContent
+                        el.textContent = text;
+                    }
+                }
+            });
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`lang-${lang}`);
+            if(activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            localStorage.setItem('siteLang', lang);
+            
+            // Set HTML lang attribute for accessibility
+            document.documentElement.lang = lang;
+        }
+
+        // Event listeners
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const selectedLang = btn.id.replace('lang-', '');
+                setLanguage(selectedLang);
+            });
+        });
+
+        // Apply saved language on load, defaulting to English
+        const savedLang = localStorage.getItem('siteLang') || 'en';
+        setLanguage(savedLang);
+
+    });
+
+// --- 2. Mobile Navbar Toggle ---
+const mobileMenu = document.getElementById('mobile-menu');
+const navbar = document.getElementById('navbar');
+
+mobileMenu.addEventListener('click', () => {
+    navbar.classList.toggle('active'); // Toggles the .active class
+    /* ... icon class toggles */
+});
+
+
+  </script>
+</body>
+</html>
+    
